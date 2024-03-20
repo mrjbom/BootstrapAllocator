@@ -1,0 +1,4 @@
+#ifndef _BOOTSTRAP_ALLOCATOR_H_
+#define _BOOTSTRAP_ALLOCATOR_H_
+
+#endif

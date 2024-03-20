@@ -15,10 +15,36 @@
     <Filter Include="Header Files\sources">
       <UniqueIdentifier>{352cc357-c148-4bae-a92c-5b36afe19a3e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\sources\bootstrap_allocator">
+      <UniqueIdentifier>{b215ef08-4ce7-469a-9d4b-3a098d98424d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\sources\bootstrap_allocator">
+      <UniqueIdentifier>{5f0dd590-97be-4526-9568-b676846f70f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\sources\tests">
+      <UniqueIdentifier>{d153d0a8-0c15-43b3-bcda-a8862f50421c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\sources\tests">
+      <UniqueIdentifier>{8886210f-3618-4396-8cac-321e2e8ac64d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\main.c">
-      <Filter>Header Files\sources</Filter>
+      <Filter>Source Files\sources</Filter>
     </ClCompile>
+    <ClCompile Include="sources\bootstrap_allocator\bootstrap_allocator.c">
+      <Filter>Source Files\sources\bootstrap_allocator</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\tests\tests.c">
+      <Filter>Source Files\sources\tests</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="sources\bootstrap_allocator\bootstrap_allocator.h">
+      <Filter>Header Files\sources\bootstrap_allocator</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\tests\tests.h">
+      <Filter>Header Files\sources\tests</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

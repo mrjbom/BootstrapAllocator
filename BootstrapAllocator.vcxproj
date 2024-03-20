@@ -127,7 +127,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="sources\bootstrap_allocator\bootstrap_allocator.c" />
     <ClCompile Include="sources\main.c" />
+    <ClCompile Include="sources\tests\tests.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="sources\bootstrap_allocator\bootstrap_allocator.h" />
+    <ClInclude Include="sources\tests\tests.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
