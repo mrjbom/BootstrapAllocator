@@ -272,4 +272,20 @@ void tests_alloc_pages(void)
     assert(bootstrap_allocator_bitmap[0] == 0b11111111);
     assert(bootstrap_allocator_bitmap[1] == 0b11111111);
     assert(bootstrap_allocator_bitmap[2] == 0b11111111);
+    // Alloc 2 pages in NORMAL (Fail)
+    allocated_ptr = bootstrap_allocator_alloc_pages(2 * 4096, BOOTSTRAP_ALLOCATOR_ZONE_NORMAL);
+    assert(allocated_ptr == NULL);
+    // 11111111111|1111111111
+    // 11111111 111|11111 11111...
+    assert(bootstrap_allocator_bitmap[0] == 0b11111111);
+    assert(bootstrap_allocator_bitmap[1] == 0b11111111);
+    assert(bootstrap_allocator_bitmap[2] == 0b11111111);
+    // Alloc 2 pages in DMA (Fail)
+    allocated_ptr = bootstrap_allocator_alloc_pages(2 * 4096, BOOTSTRAP_ALLOCATOR_ZONE_DMA);
+    assert(allocated_ptr == NULL);
+    // 11111111111|1111111111
+    // 11111111 111|11111 11111...
+    assert(bootstrap_allocator_bitmap[0] == 0b11111111);
+    assert(bootstrap_allocator_bitmap[1] == 0b11111111);
+    assert(bootstrap_allocator_bitmap[2] == 0b11111111);
 }
