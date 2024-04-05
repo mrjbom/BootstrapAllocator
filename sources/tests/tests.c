@@ -288,4 +288,25 @@ void tests_alloc_pages(void)
     assert(bootstrap_allocator_bitmap[0] == 0b11111111);
     assert(bootstrap_allocator_bitmap[1] == 0b11111111);
     assert(bootstrap_allocator_bitmap[2] == 0b11111111);
+
+    // TEST 3 (DMA 1 page)
+    // 1 page DMA: 0x1000
+    bootstrap_allocator_init(1, 1, 0, 0);
+    bootstrap_allocator_mark_range((void*)0x1000, 4096, BOOTSTRAP_ALLOCATOR_STATE_FREE);
+    allocated_ptr = bootstrap_allocator_alloc_pages(1 * 4096, BOOTSTRAP_ALLOCATOR_ZONE_DMA);
+    assert((uintptr_t)allocated_ptr == 1 * 4096);
+
+    // TEST 4 (DMA + NORMAL)
+    // 1 page DMA: 0x1000
+    // 1 page NORMAL: 0x2000
+    bootstrap_allocator_init(1, 1, 2, 2);
+    bootstrap_allocator_mark_range((void*)0x1000, 2 * 4096, BOOTSTRAP_ALLOCATOR_STATE_FREE);
+    allocated_ptr = bootstrap_allocator_alloc_pages(1 * 4096, BOOTSTRAP_ALLOCATOR_ZONE_NORMAL);
+    assert((uintptr_t)allocated_ptr == 2 * 4096);
+    allocated_ptr = bootstrap_allocator_alloc_pages(1 * 4096, BOOTSTRAP_ALLOCATOR_ZONE_NORMAL);
+    assert(allocated_ptr == NULL);
+    allocated_ptr = bootstrap_allocator_alloc_pages(1 * 4096, BOOTSTRAP_ALLOCATOR_ZONE_DMA);
+    assert((uintptr_t)allocated_ptr == 1 * 4096);
+    allocated_ptr = bootstrap_allocator_alloc_pages(1 * 4096, BOOTSTRAP_ALLOCATOR_ZONE_DMA);
+    assert(allocated_ptr == NULL);
 }

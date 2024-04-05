@@ -54,9 +54,6 @@ void bootstrap_allocator_mark_range(void* addr, size_t size, state_t state)
         return;
     }
 
-    if ((uintptr_t)addr < BOOTSTRAP_ALLOCATOR_PAGE_SIZE) {
-        return;
-    }
     size_t current_pfn = (uintptr_t)addr / BOOTSTRAP_ALLOCATOR_PAGE_SIZE;
     if (current_pfn < bootstrap_allocator_dma_min_pfn) {
         return;
@@ -93,11 +90,9 @@ void* bootstrap_allocator_alloc_pages(size_t size, zone_t zone)
     if (bootstrap_allocator_inited == false) {
         return NULL;
     }
-
     if (size == 0) {
         return NULL;
     }
-
     // If the NORMAL zone does not exist, then memory can't be allocated from the NORMAL zone
     if (bootstrap_allocator_has_normal == false && zone == BOOTSTRAP_ALLOCATOR_ZONE_NORMAL) {
         return NULL;
