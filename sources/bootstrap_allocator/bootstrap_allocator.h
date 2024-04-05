@@ -1,6 +1,7 @@
 #ifndef _BOOTSTRAP_ALLOCATOR_H_
 #define _BOOTSTRAP_ALLOCATOR_H_
 
+#include <stddef.h>
 #include <stdint.h>
 #include <stdbool.h>
 
