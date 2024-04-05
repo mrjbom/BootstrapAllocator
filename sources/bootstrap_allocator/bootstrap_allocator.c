@@ -6,7 +6,7 @@
 
 #define GET_BIT_MSB(num, bit) ((bool)(((num) >> ((sizeof(num) * 8) - 1 - (bit))) & 1))
 #define SET_BIT_MSB(num, bit) ((num) |= (1 << ((sizeof(num) * 8) - 1 - (bit))))
-#define CLEAR_BIT_MSB(num, bit) ((num) &= ~(1 << ((sizeof(num) * 8) - 1 - (bit))))
+#define CLEAR_BIT_MSB(num, num_type, bit) ((num) &= (num_type)(~(1 << ((sizeof(num) * 8) - 1 - (bit)))))
 
 bool bootstrap_allocator_inited = false;
 bool bootstrap_allocator_has_normal = false;
@@ -76,7 +76,7 @@ void bootstrap_allocator_mark_range(void* addr, size_t size, state_t state)
 
         // Clear or set the bit based on the state
         if (state == BOOTSTRAP_ALLOCATOR_STATE_FREE) {
-            CLEAR_BIT_MSB(bootstrap_allocator_bitmap[byte_offset], bit_offset);
+            CLEAR_BIT_MSB(bootstrap_allocator_bitmap[byte_offset], uint8_t, bit_offset);
         }
         else {
             SET_BIT_MSB(bootstrap_allocator_bitmap[byte_offset], bit_offset);
